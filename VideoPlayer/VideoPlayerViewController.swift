@@ -10,7 +10,7 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class VideoPlayerViewController: UIViewController {
+class VideoPlayerViewController: AVPlayerViewController {
 
     let videoSearchBar = UISearchBar()
 
@@ -18,12 +18,16 @@ class VideoPlayerViewController: UIViewController {
 
     let muteVideoButton = UIButton()
 
+    let bottomToolBarView = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpVideoSearchingTextField()
 
         setUpGestureRecognize()
+
+        setUpBottomToolBar()
 
     }
 
@@ -51,11 +55,31 @@ class VideoPlayerViewController: UIViewController {
 
     }
 
+    func setUpBottomToolBar() {
+
+        self.view.addSubview(bottomToolBarView)
+
+        bottomToolBarView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 27).isActive = true
+
+        bottomToolBarView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+
+        bottomToolBarView.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
+
+        bottomToolBarView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+
+        videoSearchBar.translatesAutoresizingMaskIntoConstraints = false
+
+        bottomToolBarView.backgroundColor = .red
+
+        bottomToolBarView.tintColor = .green
+
+    }
+
     func setUpGestureRecognize() {
 
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VideoPlayerViewController.dismissKeyboard))
+        let tapOutsideOfSearchBar: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VideoPlayerViewController.dismissKeyboard))
 
-        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tapOutsideOfSearchBar)
 
     }
 
@@ -78,13 +102,15 @@ extension VideoPlayerViewController: UISearchBarDelegate {
 
         let player = AVPlayer(url: searchBarResultURL)
 
-        playerViewController.player = player
+        self.player = player
 
-        self.present(playerViewController, animated: true, completion: {
+        player.play()
 
-            playerViewController.player?.play()
-
-        })
+//        self.present(playerViewController, animated: true, completion: {
+//
+//            playerViewController.player?.play()
+//
+//        })
 
     }
 
@@ -93,4 +119,15 @@ extension VideoPlayerViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
 
     }
+
+}
+
+extension AVPlayer {
+
+    var isPlaying: Bool {
+
+        return rate != 0 && error == nil
+
+    }
+
 }

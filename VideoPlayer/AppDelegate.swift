@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let homeViewController = VideoPlayerViewController()
 
-        homeViewController.view.backgroundColor = UIColor.black
+        homeViewController.view.backgroundColor = UIColor(red: 8.0 / 255.0, green: 21.0 / 255.0, blue: 35.0 / 255.0, alpha: 1.0)
 
         window!.rootViewController = homeViewController
 
