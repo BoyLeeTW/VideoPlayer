@@ -12,6 +12,14 @@ import AVFoundation
 
 class VideoPlayerViewController: AVPlayerViewController {
 
+    enum PlayStatus: String {
+
+        case play = "Play"
+
+        case pause = "Pause"
+
+    }
+
     let videoSearchBar = UISearchBar()
 
     let playVideoButton = UIButton()
@@ -89,13 +97,16 @@ class VideoPlayerViewController: AVPlayerViewController {
 
         playVideoButton.translatesAutoresizingMaskIntoConstraints = false
 
-        muteVideoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        playVideoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
 
-        playVideoButton.setTitle("Play", for: .normal)
+        playVideoButton.setTitle(PlayStatus.play.rawValue, for: .normal)
 
         playVideoButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         playVideoButton.titleLabel?.textColor = .white
+
+        playVideoButton.addTarget(self, action: #selector(touchPlayVideoButton(_:)), for: .touchUpInside)
+
     }
 
     func setUpMuteVideoButton() {
@@ -116,6 +127,8 @@ class VideoPlayerViewController: AVPlayerViewController {
 
         muteVideoButton.titleLabel?.textColor = .white
 
+        muteVideoButton.addTarget(self, action: #selector(touchMuteVideoButton(_:)), for: .touchUpInside)
+
     }
 
     func setUpGestureRecognize() {
@@ -131,6 +144,34 @@ class VideoPlayerViewController: AVPlayerViewController {
         view.endEditing(true)
     }
 
+    func touchPlayVideoButton(_ sender: UIButton) {
+
+        if sender.titleLabel?.text == PlayStatus.play.rawValue {
+
+            self.player?.play()
+
+        } else {
+
+            self.player?.pause()
+
+        }
+
+    }
+
+    func touchMuteVideoButton(_ sender: UIButton) {
+
+        if sender.titleLabel?.text == "Mute" {
+
+            self.player?.isMuted = true
+
+        } else {
+
+            self.player?.isMuted = false
+
+        }
+
+    }
+
 }
 
 extension VideoPlayerViewController: UISearchBarDelegate {
@@ -142,6 +183,8 @@ extension VideoPlayerViewController: UISearchBarDelegate {
               else { return }
 
         let player = AVPlayer(url: searchBarResultURL)
+
+        player.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
 
         self.player = player
 
@@ -155,13 +198,31 @@ extension VideoPlayerViewController: UISearchBarDelegate {
 
     }
 
-}
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
 
-extension AVPlayer {
+        if keyPath == "rate" {
 
-    var isPlaying: Bool {
+            if playVideoButton.titleLabel?.text == PlayStatus.play.rawValue {
 
-        return rate != 0 && error == nil
+                playVideoButton.setTitle(PlayStatus.pause.rawValue, for: .normal)
+
+            } else {
+
+                playVideoButton.setTitle(PlayStatus.play.rawValue, for: .normal)
+
+            }
+
+            if player?.isMuted == true {
+
+                muteVideoButton.setTitle("Unmute", for: .normal)
+
+            } else {
+
+                muteVideoButton.setTitle("Mute", for: .normal)
+
+            }
+
+        }
 
     }
 
