@@ -33,12 +33,37 @@ class VideoPlayerViewController: UIViewController {
 
         videoSearchBar.translatesAutoresizingMaskIntoConstraints = false
 
-//        videoSearchBar.barTintColor = .clear
+        videoSearchBar.barTintColor = .clear
 
         videoSearchBar.layer.cornerRadius = 5
 
         videoSearchBar.placeholder = "Enter URL of video"
 
+        videoSearchBar.delegate = self
+
     }
 
+    func setUpGestureRecognize() {
+
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VideoPlayerViewController.disablesAutomaticKeyboardDismissal))
+
+//        view.addGestureRecognizer(tap)
+
+    }
+
+}
+
+extension VideoPlayerViewController: UISearchBarDelegate {
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
+        print("DONE!!!!!")
+
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+
+        searchBar.resignFirstResponder()
+
+    }
 }
