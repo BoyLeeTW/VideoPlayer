@@ -17,6 +17,8 @@ class VideoPlayerViewController: UIViewController {
 
         setUpVideoSearchingTextField()
 
+        setUpGestureRecognize()
+
     }
 
     func setUpVideoSearchingTextField() {
@@ -45,12 +47,16 @@ class VideoPlayerViewController: UIViewController {
 
     func setUpGestureRecognize() {
 
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VideoPlayerViewController.disablesAutomaticKeyboardDismissal))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(VideoPlayerViewController.dismissKeyboard))
 
-//        view.addGestureRecognizer(tap)
+        view.addGestureRecognizer(tap)
 
     }
 
+    func dismissKeyboard() {
+
+        view.endEditing(true)
+    }
 }
 
 extension VideoPlayerViewController: UISearchBarDelegate {
