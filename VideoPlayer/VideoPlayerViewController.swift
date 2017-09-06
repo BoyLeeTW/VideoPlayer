@@ -29,6 +29,10 @@ class VideoPlayerViewController: AVPlayerViewController {
 
         setUpBottomToolBar()
 
+        setUpPlayVideoButton()
+
+        setUpMuteVideoButton()
+
     }
 
     func setUpVideoSearchingTextField() {
@@ -41,7 +45,7 @@ class VideoPlayerViewController: AVPlayerViewController {
 
         videoSearchBar.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 30.0 / 667.0).isActive = true
 
-        videoSearchBar.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 359.0 / 370.0 ).isActive = true
+        videoSearchBar.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 359.0 / 375.0 ).isActive = true
 
         videoSearchBar.translatesAutoresizingMaskIntoConstraints = false
 
@@ -57,21 +61,60 @@ class VideoPlayerViewController: AVPlayerViewController {
 
     func setUpBottomToolBar() {
 
+        self.showsPlaybackControls = false
+
         self.view.addSubview(bottomToolBarView)
 
-        bottomToolBarView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 27).isActive = true
+        bottomToolBarView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
 
         bottomToolBarView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 
-        bottomToolBarView.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
+        bottomToolBarView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 44.0 / 667.0).isActive = true
 
         bottomToolBarView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
 
-        videoSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        bottomToolBarView.translatesAutoresizingMaskIntoConstraints = false
 
-        bottomToolBarView.backgroundColor = .red
+        bottomToolBarView.backgroundColor = UIColor(red: 0.0 / 255.0, green: 0.0 / 255.0, blue: 0.0 / 255.0, alpha: 0.9)
 
-        bottomToolBarView.tintColor = .green
+    }
+
+    func setUpPlayVideoButton() {
+
+        bottomToolBarView.addSubview(playVideoButton)
+
+        playVideoButton.leadingAnchor.constraint(equalTo: bottomToolBarView.leadingAnchor, constant: 20).isActive = true
+
+        playVideoButton.centerYAnchor.constraint(equalTo: bottomToolBarView.centerYAnchor).isActive = true
+
+        playVideoButton.translatesAutoresizingMaskIntoConstraints = false
+
+        muteVideoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+
+        playVideoButton.setTitle("Play", for: .normal)
+
+        playVideoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
+        playVideoButton.titleLabel?.textColor = .white
+    }
+
+    func setUpMuteVideoButton() {
+
+        bottomToolBarView.addSubview(muteVideoButton)
+
+        muteVideoButton.trailingAnchor.constraint(equalTo: bottomToolBarView.trailingAnchor, constant: -16).isActive = true
+
+        muteVideoButton.centerYAnchor.constraint(equalTo: bottomToolBarView.centerYAnchor).isActive = true
+
+        muteVideoButton.translatesAutoresizingMaskIntoConstraints = false
+
+        muteVideoButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+
+        muteVideoButton.setTitle("Mute", for: .normal)
+
+        muteVideoButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
+        muteVideoButton.titleLabel?.textColor = .white
 
     }
 
@@ -98,19 +141,11 @@ extension VideoPlayerViewController: UISearchBarDelegate {
               let searchBarResultURL = URL(string: searchBarResultString)
               else { return }
 
-        let playerViewController = AVPlayerViewController()
-
         let player = AVPlayer(url: searchBarResultURL)
 
         self.player = player
 
         player.play()
-
-//        self.present(playerViewController, animated: true, completion: {
-//
-//            playerViewController.player?.play()
-//
-//        })
 
     }
 
