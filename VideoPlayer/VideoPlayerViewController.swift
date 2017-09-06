@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class VideoPlayerViewController: UIViewController {
 
     let videoSearchBar = UISearchBar()
+
+    let playVideoButton = UIButton()
+
+    let muteVideoButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,13 +63,28 @@ class VideoPlayerViewController: UIViewController {
 
         view.endEditing(true)
     }
+
 }
 
 extension VideoPlayerViewController: UISearchBarDelegate {
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 
-        print("DONE!!!!!")
+        guard let searchBarResultString = videoSearchBar.text,
+              let searchBarResultURL = URL(string: searchBarResultString)
+              else { return }
+
+        let playerViewController = AVPlayerViewController()
+
+        let player = AVPlayer(url: searchBarResultURL)
+
+        playerViewController.player = player
+
+        self.present(playerViewController, animated: true, completion: {
+
+            playerViewController.player?.play()
+
+        })
 
     }
 

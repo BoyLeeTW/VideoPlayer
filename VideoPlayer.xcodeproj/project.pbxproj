@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2F764DE1F5FC41B00A4FF05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F764DD1F5FC41B00A4FF05 /* AppDelegate.swift */; };
-		A2F764E01F5FC41B00A4FF05 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F764DF1F5FC41B00A4FF05 /* ViewController.swift */; };
+		A2F764E01F5FC41B00A4FF05 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F764DF1F5FC41B00A4FF05 /* VideoPlayerViewController.swift */; };
 		A2F764E51F5FC41B00A4FF05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2F764E41F5FC41B00A4FF05 /* Assets.xcassets */; };
 		A2F764E81F5FC41B00A4FF05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2F764E61F5FC41B00A4FF05 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		A2F764DA1F5FC41B00A4FF05 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F764DD1F5FC41B00A4FF05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A2F764DF1F5FC41B00A4FF05 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A2F764DF1F5FC41B00A4FF05 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		A2F764E41F5FC41B00A4FF05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2F764E71F5FC41B00A4FF05 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2F764E91F5FC41B00A4FF05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				A2F764DD1F5FC41B00A4FF05 /* AppDelegate.swift */,
-				A2F764DF1F5FC41B00A4FF05 /* ViewController.swift */,
+				A2F764DF1F5FC41B00A4FF05 /* VideoPlayerViewController.swift */,
 				A2F764E41F5FC41B00A4FF05 /* Assets.xcassets */,
 				A2F764E61F5FC41B00A4FF05 /* LaunchScreen.storyboard */,
 				A2F764E91F5FC41B00A4FF05 /* Info.plist */,
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2F764E01F5FC41B00A4FF05 /* ViewController.swift in Sources */,
+				A2F764E01F5FC41B00A4FF05 /* VideoPlayerViewController.swift in Sources */,
 				A2F764DE1F5FC41B00A4FF05 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
